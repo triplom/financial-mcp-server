@@ -15,6 +15,7 @@ from typing import Any
 import mcp.server.stdio
 import mcp.types as types
 from mcp.server import Server
+from mcp.server.lowlevel.server import NotificationOptions
 from mcp.server.models import InitializationOptions
 
 from financial_mcp.cache import stats as cache_stats
@@ -370,7 +371,7 @@ def main() -> None:
                 server_name="financial-mcp-server",
                 server_version="0.1.0",
                 capabilities=app.get_capabilities(
-                    notification_options=None,
+                    notification_options=NotificationOptions(),
                     experimental_capabilities={},
                 ),
             )
