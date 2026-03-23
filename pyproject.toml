@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "financial-mcp-server"
+version = "0.1.0"
+description = "A Model Context Protocol server aggregating free public financial data"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Financial MCP Server" }]
+
+dependencies = [
+    "mcp>=1.0.0",
+    "yfinance>=1.2.0",
+    "fredapi>=0.5.2",
+    "pycoingecko>=3.1.0",
+    "tiingo>=0.16.1",
+    "alpha-vantage>=3.0.0",
+    "polygon-api-client>=1.16.3",
+    "sec-edgar-downloader>=5.1.0",
+    "requests>=2.32.0",
+    "cachetools>=5.3.0",
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.0.0",
+    "httpx>=0.27.0",
+    "tenacity>=8.2.0",
+    "pandas>=2.0.0",
+    "numpy>=1.26.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-mock>=3.12.0",
+    "ruff>=0.4.0",
+    "mypy>=1.10.0",
+]
+
+[project.scripts]
+financial-mcp-server = "financial_mcp.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/financial_mcp"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
